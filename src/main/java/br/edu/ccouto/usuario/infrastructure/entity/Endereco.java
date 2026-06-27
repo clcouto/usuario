@@ -1,16 +1,14 @@
 package br.edu.ccouto.usuario.infrastructure.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "endereco")
 public class Endereco {
 
@@ -30,5 +28,4 @@ public class Endereco {
     private String cidade;
     @Column(name = "cep", length = 9)
     private String cep;
-
 }
