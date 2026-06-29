@@ -15,7 +15,6 @@ import java.util.List;
 public class UsuarioConverter {
 
     public Usuario paraUsuario(UsuarioDTO usuarioDTO){
-
         return Usuario.builder()
                 .email(usuarioDTO.getEmail())
                 .nome(usuarioDTO.getNome())
@@ -47,7 +46,7 @@ public class UsuarioConverter {
     }
 
     //Metodo 2 - Utilizando stream e map no lugar de for
-    public List<Telefone> paraListaTelefone(List<TelefoneDTO telefoneDTOS){
+    public List<Telefone> paraListaTelefone(List<TelefoneDTO> telefoneDTOS){
         return telefoneDTOS.stream().map(this::paraTelefone).toList();
 
     }
@@ -92,7 +91,7 @@ public UsuarioDTO paraUsuarioDTO(Usuario usuarioDTO){
     }
 
     //Metodo 2 - Utilizando stream e map no lugar de for
-    public List<TelefoneDTO> paraListaTelefoneDTO(List<Telefone telefoneDTOS){
+    public List<TelefoneDTO> paraListaTelefoneDTO(List<Telefone> telefoneDTOS){
         return telefoneDTOS.stream().map(this::paraTelefoneDTO).toList();
 
     }

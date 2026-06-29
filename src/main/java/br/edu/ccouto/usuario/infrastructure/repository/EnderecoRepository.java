@@ -1,6 +1,6 @@
 package br.edu.ccouto.usuario.infrastructure.repository;
 
-import br.edu.ccouto.repositorio1.infrastructure.entity.Endereco;
+import br.edu.ccouto.usuario.infrastructure.entity.Endereco;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
