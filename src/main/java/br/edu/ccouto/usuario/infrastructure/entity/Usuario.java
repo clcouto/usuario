@@ -54,5 +54,3 @@ public class Usuario implements UserDetails {
         return email;
     }
 }
-
-//teste
