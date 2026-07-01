@@ -88,6 +88,7 @@ public class UsuarioService {
     public EnderecoDTO atualizaEndereco(Long idEndereco, EnderecoDTO enderecoDTO){
         Endereco entity = enderecoRepository.findById(idEndereco).orElseThrow(
                 () -> new ResourceNotFoundException("ID não encontrado " + idEndereco));
+
         Endereco endereco = usuarioConverter.updateEndereco(enderecoDTO, entity);
         return usuarioConverter.paraEnderecoDTO(enderecoRepository.save(endereco));
     }
@@ -95,8 +96,34 @@ public class UsuarioService {
     public TelefoneDTO atualizaTelefone(Long idTelefone, TelefoneDTO telefoneDTO){
         Telefone entity = telefoneRepository.findById(idTelefone).orElseThrow(
                 () -> new ResourceNotFoundException("ID não encontrado " + idTelefone));
+
         Telefone telefone = usuarioConverter.updateTelefone(telefoneDTO, entity);
-        return usuarioConverter.paraTelefoneDTO(telefoneRepository.save(telefone));
+        return usuarioConverter.paraTelefoneDTO(
+                telefoneRepository.save(telefone)
+        );
+    }
+
+    public EnderecoDTO cadastraEndereco(String token, EnderecoDTO enderecoDTO){
+        String email = jwtUtil.extractUsername(token.substring(7));
+        Usuario usuario = usuarioRepository.findByEmail(email).orElseThrow(() ->
+                new ResourceNotFoundException("E-mail não localizado " + email));
+
+        Endereco endereco = usuarioConverter.paraEnderecoEntity(enderecoDTO, usuario.getId());
+        Endereco enderecoEntity = enderecoRepository.save(endereco);
+        //Metodo 1 de return
+        return usuarioConverter.paraEnderecoDTO(enderecoEntity);
+    }
+
+    public TelefoneDTO cadastraTelefone(String token, TelefoneDTO telefoneDTO){
+        String email = jwtUtil.extractUsername(token.substring(7));
+        Usuario usuario = usuarioRepository.findByEmail(email).orElseThrow(() ->
+                new ResourceNotFoundException("E-mail não localizado " + email));
+
+        Telefone telefone = usuarioConverter.paraTelefoneEntity(telefoneDTO, usuario.getId());
+        //Metodo 2 de return
+        return usuarioConverter.paraTelefoneDTO(
+                telefoneRepository.save(telefone)
+        );
     }
 }
 
